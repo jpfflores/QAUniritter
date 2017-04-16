@@ -4,6 +4,7 @@ package page;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -89,9 +90,18 @@ public class SelecionaProdutoPage extends MasterPage {
 		elemento.click();
 	}
 	
-	public WebElement carregaPrimeiroItem(){
-		WebElement elemento = driver.findElement(By.xpath("//*[@id='homefeatured']/li[1]/div/div[2]/div[2]/a[1]/span"));
-		return elemento;
+	public void CarregaPrimeiroItem(){
+	
+		WebElement elemento = driver.findElement(By.xpath("//*[@id='center_column']/ul/li/div/div[2]/div[2]/a[2]/span"));
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("return arguments[0].click()", elemento);
+		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
+	public void executaBusca(String produto){
+		digitaTexto(getSearch(), produto);
+		getSearchButton().click();
+		
+	}
 }

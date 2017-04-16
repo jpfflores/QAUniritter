@@ -14,6 +14,7 @@ public class FancyBoxPage extends MasterPage {
 	private WebElement proceed;
 	private WebElement checkout;
 	private WebElement keepshop;
+	private WebElement addtocart;
 	
 	public WebElement getAddToCart(){
 		try{
@@ -60,4 +61,13 @@ public class FancyBoxPage extends MasterPage {
 		keepshop = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[2]/div[4]/span"));
 	}
 
+	public WebElement getAddtocart(){
+		WebElement elemento = driver.findElement(By.xpath("//*[@id='add_to_cart']/button/span"));
+		return elemento;
+	}
+	public WebElement getConfirmacao(){
+		
+		WebElement elemento = driver.findElement(By.xpath("//*[@id='layer_cart']/div[1]/div[1]/h2"));
+		return elemento;
+	}
 }

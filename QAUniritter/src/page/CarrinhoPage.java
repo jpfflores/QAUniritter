@@ -3,7 +3,6 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -78,14 +77,11 @@ public class CarrinhoPage extends MasterPage {
 	public void excluiItem(){
 		mostraCarrinho();
 		((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ajax_cart_block_remove_link')[0].click();");
-//		wait.until(ExpectedConditions.visibilityOfElementLocated((By) getRemoveItem()));
-//		builder.moveToElement(getRemoveItem()).click().build().perform();
 	}
 	
 	public void adicionaItemCarrinho(String produto) {
 		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
-		digitaTexto(busca.getSearch(), produto);
-		busca.getSearchButton().click();
+		busca.executaBusca(produto);
 		
 		// Comprar Primeiro produto
 		FancyBoxPage box = new FancyBoxPage(baseDriver);
@@ -130,6 +126,5 @@ public class CarrinhoPage extends MasterPage {
 		checkout = driver.findElement(By.xpath("//*[@id='header']/div[3]/div/div/div[3]/div/a"));
 		return checkout;
 	}
-	
 
 }

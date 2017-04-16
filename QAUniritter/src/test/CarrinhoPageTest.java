@@ -13,11 +13,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.junit.Assert;
 import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 
 import page.CarrinhoPage;
+import page.FancyBoxPage;
+import page.SelecionaProdutoPage;
 import run.Driver;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarrinhoPageTest {
@@ -74,8 +77,19 @@ public class CarrinhoPageTest {
 		// Remove todos os itens
 		int qty = 0;
 		qty = carrinho.GetQuantityValue();
+		
 		carrinho.excluiItem();
 		Assert.assertNotNull(carrinho.getEmpty());
+	}
+	
+	@Test
+	public void testeDAdiconaViaFancyBox(){
+		SelecionaProdutoPage busca = new SelecionaProdutoPage(baseDriver);
+		busca.executaBusca("blouses");
+		busca.CarregaPrimeiroItem();
+		FancyBoxPage box = new FancyBoxPage(baseDriver);
+		box.getAddtocart().click();
+		Assert.assertNotNull(box.getConfirmacao());
 	}
 
 	@After
